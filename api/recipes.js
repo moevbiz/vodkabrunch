@@ -13,7 +13,7 @@ const googleSheetUrl = `https://spreadsheets.google.com/feeds/list/${sheetID}/1/
 app.get('/api/recipes', (req, res, next) => {
     axios.get(googleSheetUrl)
     .then(data => {
-        console.log(data.data.feed.entry);
+        // console.log(data.data.feed.entry);
         let entries = data.data.feed.entry;
         let r = entries.map(entry => ({
             title: entry.gsx$title.$t,

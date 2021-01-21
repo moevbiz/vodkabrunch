@@ -9,10 +9,22 @@ async function getData() {
 getData()
 .then(data => init(data));
 
+const filterContainer = document.querySelector('.filter-container');
+const btnAll = document.querySelector('button[data-value="all"]');
+btnAll.addEventListener('click', (e) => {
+	filter(e.target.dataset.value);
+})
+
+let addedFilters = [];
+let elements = [];
+let filters = [btnAll];
+
 function init(data) {
 	document.body.classList.remove('loading');
-	let elements = [];
 	data.forEach(element => {
+		if (!addedFilters.includes(element.type)) {
+			filters.push(createFilter(element));
+		}
 		elements.push(createDiv(element));
 	});
 	// elements.forEach(element => {
@@ -20,6 +32,44 @@ function init(data) {
 	// })
 	console.log(data);
 	console.log(elements);
+}
+
+function createFilter(element) {
+	let str = `${element.type}`;
+	let btn = document.createElement('button');
+	btn.innerHTML = str;
+	btn.dataset.value = element.type;
+	btn.addEventListener('click', (e) => {
+		filter(e.target.dataset.value);
+	})
+	filterContainer.appendChild(btn);
+	addedFilters.push(element.type);
+	return btn;
+}
+
+function filter(value) {
+	if (value == 'all') {
+		elements.forEach(element => {
+			element.classList.remove('is-hidden');
+		})
+		filters.forEach(filter => {
+			filter.classList.remove('is-selected');
+		})
+	}
+	filters.forEach(filter => {
+		if (filter.dataset.value == value) {
+			filter.classList.add('is-selected');
+		} else {
+			filter.classList.remove('is-selected');
+		}
+	})
+	elements.forEach(element => {
+		if (element.dataset.type == value || value == 'all') {
+			element.classList.remove('is-hidden');
+		} else {
+			element.classList.add('is-hidden');
+		}
+	})
 }
 
 function createDiv(element) {
@@ -63,6 +113,7 @@ function createDiv(element) {
 		</div>
 	`
 	let article = document.createElement('article');
+	article.dataset.type = element.type;
 	article.innerHTML = str;
 	article.classList.add('is-collapsed');
 	article.querySelector('h2').addEventListener('click', () => {
