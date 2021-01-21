@@ -100,7 +100,7 @@ function createDiv(element) {
 		<div class="details">
 			<div class="text">
 				<h3>Instructions</h3>
-				<p>${element.text}</p>
+				<p>${element.text.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>
 			</div>
 			<div class="text">
 				<h3>Notes</h3>
