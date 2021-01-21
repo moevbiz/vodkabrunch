@@ -27,10 +27,23 @@ body {
         }
     }
 }
+header {
+    border-bottom: 1px solid lightgray;
+}
 h1 {
     text-align: center;
     font-size: 2rem;
     border-bottom: 1px solid lightgrey;
+    color: blueviolet;
+}
+
+.center {
+    text-align: center;
+}
+
+.nobreak {
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .filter-container {
