@@ -1,5 +1,7 @@
 dist/
+public/
 node_modules/
+
 .env
 .cache
 .vercel

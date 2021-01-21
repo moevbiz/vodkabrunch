@@ -8,7 +8,7 @@ const port = 3000
 const sheetID = process.env.GOOGLE_SHEET_ID;
 const googleSheetUrl = `https://spreadsheets.google.com/feeds/list/${sheetID}/1/public/values?alt=json`;
 
-const checkResult = res => res.ok ? res.json() : Promise.resolve({});
+// const checkResult = res => res.ok ? res.json() : Promise.resolve({});
 
 app.get('/api/recipes', (req, res, next) => {
     axios.get(googleSheetUrl)
@@ -21,10 +21,11 @@ app.get('/api/recipes', (req, res, next) => {
             ingredients: entry.gsx$ingredients.$t,
             difficulty: entry.gsx$difficulty.$t,
             preptime: entry.gsx$preptime.$t,
-            contributor: entry.gsx$contributedby.$t,
+            contributor: entry.gsx$suggestedby.$t,
             text: entry.gsx$text.$t,
             made_by: entry.gsx$madeby.$t,
             goes_well_with: entry.gsx$goeswellwith.$t,
+            notes: entry.gsx$notes.$t,
             id: entry.id.$t.split('/').pop(),
         }))
         res.setHeader('Content-Type', 'application/json');
