@@ -15,13 +15,18 @@ btnAll.addEventListener('click', (e) => {
 	filter(e.target.dataset.value);
 })
 
+const btnContribute = document.querySelector('button.contribute');
+
 let addedFilters = [];
 let elements = [];
 let filters = [btnAll];
 
 function init(data) {
+	btnContribute.addEventListener('click', () => {
+		window.location = data.buttonLink;
+	})
 	document.body.classList.remove('loading');
-	data.forEach(element => {
+	data.recipes.forEach(element => {
 		if (!addedFilters.includes(element.type)) {
 			filters.push(createFilter(element));
 		}

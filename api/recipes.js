@@ -15,6 +15,7 @@ app.get('/api/recipes', (req, res, next) => {
     .then(data => {
         // console.log(data.data.feed.entry);
         let entries = data.data.feed.entry;
+        let buttonLink = `https://docs.google.com/spreadsheets/d/${sheetID}/edit#gid=0`;
         let r = entries.map(entry => ({
             title: entry.gsx$title.$t,
             type: entry.gsx$type.$t,
@@ -30,7 +31,7 @@ app.get('/api/recipes', (req, res, next) => {
         }))
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-        return res.json(r);
+        return res.json({recipes: r, buttonLink: buttonLink});
     })
     .catch(err => next(err));
 })
