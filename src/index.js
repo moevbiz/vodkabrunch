@@ -24,7 +24,7 @@ function init(data) {
 
 function createDiv(element) {
 	let str = `
-		<h2 class="full">${element.title}</h2>
+		<h2 class="full"><span>${element.title}</span></h2>
 		<div class="infos">
 			<div class="info">
 				<h3>Type</h3>

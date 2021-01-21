@@ -43,6 +43,14 @@ article {
     & .infos {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-gap: 1rem;
+
+        @media (max-width: 600px) {
+            grid-template-columns: repeat(2, 1fr);
+            & .info:last-child {
+                grid-column: 1/-1;
+            }
+        }
     }
 
     & .details {
@@ -64,6 +72,10 @@ article {
         grid-column: 1/-1;
         padding: 1rem;
         font-family: fantasy;
+
+        &:hover span {
+            text-decoration: underline;
+        }
     }
 
     & h3 {
