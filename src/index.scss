@@ -4,6 +4,8 @@ html {
     height: 100%;
 }
 body {
+    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='50' height='60' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>🍸</text></svg>") 16 0,auto; /*!emojicursor.app*/
+
     height: 100%;
     width: 100%;
     font-family: sans-serif;
@@ -44,6 +46,7 @@ button {
     padding: 0 .5rem;
     margin-top: .5rem;
     margin-right: .5rem;
+    cursor:pointer;
 
     &.is-selected {
         background-color: red;
@@ -90,7 +93,7 @@ article {
     }
 
     & h2 {
-        cursor: pointer;
+        cursor:pointer;
         font-size: 2rem;
         grid-column: 1/-1;
         padding: 1rem;
