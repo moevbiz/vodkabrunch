@@ -14,8 +14,17 @@
         <p class="center">27 of January, 2021 at 4 pm on zooom</p>
         <p class="center"><strong>Food delivery + distribution</strong>: 27 of January, 12-14 pm at Kurzbauergasse Garden</p>
     </header>
-    <div class="filter-container">
-        <button data-value="all" class="is-selected">All</button>
+    <nav>
+        <ul>
+            <li><button data-toggle-view="recipes" class="menu-btn is-active" id="recipes-btn" style="--background:gold">Recipes</button></li>
+            <li><button data-toggle-view="program" class="menu-btn" id="program-btn" style="--background:lavender">Program</button></li>
+        </ul>
+    </nav>
+    <div data-view="recipes" id="recipes">
+        <div class="filter-container">
+            <button data-value="all" class="is-selected">All</button>
+        </div>
     </div>
+    <div data-view="program" id="program" class="is-hidden"></div>
 </body>
 </html>

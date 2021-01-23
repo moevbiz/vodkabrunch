@@ -19,9 +19,18 @@ const btnContribute = document.querySelector('button.contribute');
 
 let addedFilters = [];
 let elements = [];
+let programs = [];
 let filters = [btnAll];
 
 function init(data) {
+	const menuBtns = document.querySelectorAll('.menu-btn');
+	menuBtns.forEach(menuBtn => {
+		menuBtn.addEventListener('click', e => {
+			e.preventDefault();
+			toggleView(e.target.dataset.toggleView);
+		})
+	})
+
 	btnContribute.addEventListener('click', () => {
 		window.location = data.buttonLink;
 	})
@@ -32,11 +41,14 @@ function init(data) {
 		}
 		elements.push(createDiv(element));
 	});
+	data.program.forEach(p => {
+		programs.push(createProgramDiv(p))
+	})
 	// elements.forEach(element => {
 	// 	document.body.insertAdjacentHTML('beforeend', element)
 	// })
-	console.log(data);
-	console.log(elements);
+	// console.log(data);
+	// console.log(elements);
 }
 
 function createFilter(element) {
@@ -104,6 +116,10 @@ function createDiv(element) {
 		</div>
 		<div class="details">
 			<div class="text">
+				<h3>Ingredients</h3>
+				<p>${element.ingredients.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>
+			</div>
+			<div class="text">
 				<h3>Instructions</h3>
 				<p>${element.text.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>
 			</div>
@@ -128,8 +144,58 @@ function createDiv(element) {
 			article.classList.add('is-collapsed');
 		}
 	})
-	document.body.appendChild(article);
+	document.querySelector('#recipes').appendChild(article);
 	return article;
+}
+
+function createProgramDiv(element) {
+	let str = `
+		<h2 class="full">${element.title}</h2>
+		<div class="infos">
+			<div class="info">
+				<h3>Name</h3>
+				<p>${element.name}</p>
+			</div>
+			<div class="info">
+				<h3>What</h3>
+				<p>${element.what}</p>
+			</div>
+			<div class="info">
+				<h3>Duration</h3>
+				<p>${element.duration}</p>
+			</div>
+		</div>
+		<div class="details">
+			<div class="text">
+				<h3>Details</h3>
+				<p>${element.details.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>
+			</div>
+		</div>
+	`
+	let article = document.createElement('article');
+	article.innerHTML = str;
+	document.querySelector('#program').appendChild(article);
+	return article;
+}
+
+function toggleView(view) {
+	let views = document.querySelectorAll('[data-view]');
+	let menuBtns = document.querySelectorAll('[data-toggle-view]');
+	console.log(views);
+	views.forEach(v => {
+		if (v.dataset.view === view) {
+			v.classList.remove('is-hidden');
+		} else {
+			v.classList.add('is-hidden');
+		}
+	});
+	menuBtns.forEach(menuBtn => {
+		if (menuBtn.dataset.toggleView === view) {
+			menuBtn.classList.add('is-active');
+		} else {
+			menuBtn.classList.remove('is-active');
+		}
+	})
 }
 
 // import App from './App.svelte';
