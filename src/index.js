@@ -1,3 +1,5 @@
+const Marquee3k = require('./js-fx/marquee3k.min.js');
+
 const api = `api/recipes`;
 
 async function getData() {
@@ -23,6 +25,7 @@ let programs = [];
 let filters = [btnAll];
 
 function init(data) {
+	Marquee3k.init();
 	const menuBtns = document.querySelectorAll('.menu-btn');
 	menuBtns.forEach(menuBtn => {
 		menuBtn.addEventListener('click', e => {
