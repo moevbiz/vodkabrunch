@@ -27,6 +27,14 @@ body {
         }
     }
 }
+.image {
+    width: 100%;
+    overflow: hidden;
+    & img {
+        object-fit: cover;
+        object-position: center;
+    }
+}
 header {
     border-bottom: 1px solid lightgray;
 }

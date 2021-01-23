@@ -22,7 +22,8 @@ function getProgram() {
 app.get('/api/recipes', (req, res, next) => {
     Promise.all([getRecipes(), getProgram()])
     .then(([recipeData, programData]) => {
-        // res.json(data.data);
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
         // console.log(data.data.feed.entry);
         let recipes = recipeData.data.feed.entry;
         let program = programData.data.feed.entry;
@@ -47,8 +48,6 @@ app.get('/api/recipes', (req, res, next) => {
             what: entry.gsx$what.$t,
             details: entry.gsx$details.$t
         }))
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
         return res.json({
             recipes: recipes, 
             program: program,
