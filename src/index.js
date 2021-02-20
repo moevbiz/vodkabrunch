@@ -1,6 +1,13 @@
 const Marquee3k = require('./js-fx/marquee3k.min.js');
+const sanitizeHtml = require('sanitize-html');
 
 const api = `api/recipes`;
+
+console.log(sanitizeHtml.defaults.allowedAttributes);
+
+const sanitizeOpts = {
+	allowedAttributes: {...sanitizeHtml.defaults.allowedAttributes, div: [ 'class' ]}
+}
 
 async function getData() {
     let response = await fetch(api);
@@ -138,7 +145,7 @@ function createDiv(element) {
 	`
 	let article = document.createElement('article');
 	article.dataset.type = element.type;
-	article.innerHTML = str;
+	article.innerHTML = sanitizeHtml(str, sanitizeOpts);
 	article.classList.add('is-collapsed');
 	article.querySelector('h2').addEventListener('click', () => {
 		if (article.classList.contains('is-collapsed')) {
@@ -176,7 +183,7 @@ function createProgramDiv(element) {
 		</div>
 	`
 	let article = document.createElement('article');
-	article.innerHTML = str;
+	article.innerHTML = sanitizeHtml(str, sanitizeOpts);
 	document.querySelector('#program').appendChild(article);
 	return article;
 }
